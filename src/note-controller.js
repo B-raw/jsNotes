@@ -12,6 +12,7 @@
       .getElementById("back_to_notes")
       .addEventListener("click", function(clickEvent) {
         clickEvent.preventDefault();
+        window.location.hash = "";
         noteController.insertHTML();
     });
   }
@@ -27,6 +28,7 @@
         clickEvent.preventDefault();
         noteList.addNote(clickEvent.path[1][0].value);
         noteController.insertHTML();
+        window.location.hash = ""
       });
   }
 
