@@ -1,6 +1,6 @@
 (function(exports) {
   function NoteList() {
-    this.notes = []
+    this.notes = [];
   }
 
   NoteList.prototype.addNote = function(text) {
@@ -15,10 +15,10 @@
   NoteList.prototype.findNoteById = function(id) {
     for (var i = 0; i < this.notes.length; i++) {
       if (this.notes[i].id === id) {
-        return this.notes[i]
+        return this.notes[i];
       }
     }
-  }
+  };
 
   exports.NoteList = NoteList;
   exports.addNote = this.addNote;

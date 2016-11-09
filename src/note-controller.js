@@ -1,22 +1,34 @@
 (function(exports) {
   function NoteController(noteList) {
-    this.noteList = noteList
+    this.noteList = noteList;
     this.noteListView = new NoteListView();
+  }
+
+// LINK TO GO BACK TO ALL NOTES
+// This function is called at the end of "showNote" because that is when the back_to_notes link is on page
+
+  function listenForBackToAllNotes() {
+    document
+      .getElementById("back_to_notes")
+      .addEventListener("click", function(clickEvent) {
+        clickEvent.preventDefault();
+        noteController.insertHTML();
+    });
   }
 
 // SUBMITTING NEW FORM
 
-listenForFormSubmit();
+  listenForFormSubmit();
 
-      function listenForFormSubmit() {
-        document
-          .getElementById("submit_form")
-          .addEventListener("click", function(clickEvent) {
-            clickEvent.preventDefault();
-
-            console.log(clickEvent.path[1][0].value);
-          });
-      };
+  function listenForFormSubmit() {
+    document
+      .getElementById("submit_form")
+      .addEventListener("click", function(clickEvent) {
+        clickEvent.preventDefault();
+        noteList.addNote(clickEvent.path[1][0].value);
+        noteController.insertHTML();
+      });
+  }
 
 
 // CHANGING URLS
@@ -37,12 +49,13 @@ listenForFormSubmit();
   function showNote(note_id) {
     var note = this.noteList.findNoteById(parseInt(note_id));
     var singleNoteView = new SingleNoteView(note);
-    document.getElementById("app").innerHTML = singleNoteView.renderNote();
+    document.getElementById("app").innerHTML = singleNoteView.addReturnLink() + singleNoteView.renderNote();
+    listenForBackToAllNotes();
   }
 
   NoteController.prototype.insertHTML = function() {
-    var html = this.noteListView.renderAll(this.noteList)
-    document.getElementById("app").innerHTML=html
+    var html = this.noteListView.renderAll(this.noteList);
+    document.getElementById("app").innerHTML=html;
   };
 
 
