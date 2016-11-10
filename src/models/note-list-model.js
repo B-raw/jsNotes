@@ -21,6 +21,4 @@
   };
 
   exports.NoteList = NoteList;
-  exports.addNote = this.addNote;
-  exports.returnNotes = this.returnNotes;
 })(this);
